@@ -75,3 +75,8 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Other unwanted UE4 files
+*enc_temp_folder/*
+*WindowsNoEditor/*
+*.uproject
