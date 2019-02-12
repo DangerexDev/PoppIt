@@ -5,3 +5,4 @@
 
 IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, PoppIt, "PoppIt" );
  
+DEFINE_LOG_CATEGORY(LogPoppIt);
