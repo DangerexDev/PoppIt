@@ -12,7 +12,7 @@ APICharacter::APICharacter()
 , ProjectileHoldAnchor(nullptr)
 {
 	ProjectileHoldAnchor = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileHoldAnchor"));
-	ProjectileHoldAnchor->SetupAttachment(GetMesh(), FName("index_01_r"));
+	ProjectileHoldAnchor->SetupAttachment(GetMesh(), FName("RightHand"));
 }
 
 void APICharacter::GrabDart()
