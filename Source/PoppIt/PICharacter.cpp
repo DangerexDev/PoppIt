@@ -8,8 +8,8 @@
 
 APICharacter::APICharacter()
 : Super()
-, HeldProjectile(nullptr)
 , ProjectileHoldAnchor(nullptr)
+, HeldProjectile(nullptr)
 {
 	ProjectileHoldAnchor = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileHoldAnchor"));
 	ProjectileHoldAnchor->SetupAttachment(GetMesh(), FName("RightHand"));
