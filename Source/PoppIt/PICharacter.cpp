@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
 #include "PIDartProjectile.h"
+#include "Components/InputComponent.h"
 
 APICharacter::APICharacter()
 : Super()
@@ -43,9 +44,40 @@ void APICharacter::ReleaseDart()
 	}
 }
 
+void APICharacter::MoveForward(float Value)
+{
+	if (GetVelocity().IsZero() && Value == 0)
+	{
+		bUseControllerRotationYaw = false;
+	}
+	else
+	{
+		bUseControllerRotationYaw = true;
+	}
+
+	Super::MoveForward(Value);
+}
+
+void APICharacter::MoveRight(float Value)
+{
+	if (GetVelocity().IsZero() && Value == 0)
+	{
+		bUseControllerRotationYaw = false;
+	}
+	else
+	{
+		bUseControllerRotationYaw = true;
+	}
+
+	Super::MoveRight(Value);
+}
+
 void APICharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAxis("MoveForward", this, &APICharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &APICharacter::MoveRight);
 
 	PlayerInputComponent->BindAction("ThrowDart", IE_Pressed, this, &APICharacter::BeginThrowDart);
 }

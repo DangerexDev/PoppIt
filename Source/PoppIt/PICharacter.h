@@ -51,6 +51,11 @@ protected:
 
 	class APIDartProjectile* HeldProjectile;
 
+	// APoppItCharacter interface
+	virtual void MoveForward(float Value) override;
+	virtual void MoveRight(float Value) override;
+	// End of APoppItCharacter interface
+
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
