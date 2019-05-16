@@ -6,6 +6,7 @@
 #include "Engine/World.h"
 #include "PIDartProjectile.h"
 #include "Components/InputComponent.h"
+#include "Camera/CameraComponent.h"
 
 APICharacter::APICharacter()
 : Super()
@@ -35,7 +36,11 @@ void APICharacter::ReleaseDart()
 	if (HeldProjectile)
 	{
 		HeldProjectile->DetachFromActor(DetachmentTransformRules);
-		HeldProjectile->LaunchInDirection(GetActorForwardVector());
+		if (GetFollowCamera())
+		{
+			const FVector ThrowDirection(GetActorForwardVector().X, GetActorForwardVector().Y, GetFollowCamera()->GetForwardVector().Z);
+			HeldProjectile->LaunchInDirection(ThrowDirection);
+		}
 		HeldProjectile = nullptr;
 	}
 	else
