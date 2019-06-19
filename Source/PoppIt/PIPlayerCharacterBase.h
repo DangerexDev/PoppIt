@@ -4,10 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "PoppItCharacter.generated.h"
+#include "PIPlayerCharacterBase.generated.h"
 
 UCLASS(config=Game)
-class APoppItCharacter : public ACharacter
+class APIPlayerCharacterBase : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -19,7 +19,7 @@ class APoppItCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 public:
-	APoppItCharacter();
+	APIPlayerCharacterBase();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)

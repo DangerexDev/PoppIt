@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PoppItGameMode.h"
+#include "PIGameModeBase.h"
 #include "PIGameMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class POPPIT_API APIGameMode : public APoppItGameMode
+class POPPIT_API APIGameMode : public APIGameModeBase
 {
 	GENERATED_BODY()
 	

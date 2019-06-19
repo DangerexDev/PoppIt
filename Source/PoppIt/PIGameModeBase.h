@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "PoppItGameMode.generated.h"
+#include "PIGameModeBase.generated.h"
 
 UCLASS(minimalapi)
-class APoppItGameMode : public AGameModeBase
+class APIGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
 public:
-	APoppItGameMode();
+	APIGameModeBase();
 };
 
 

@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PoppItCharacter.h"
-#include "PICharacter.generated.h"
+#include "PIPlayerCharacterBase.h"
+#include "PIPlayerCharacter.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBeginThrowDartSignature);
 
@@ -12,13 +12,26 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBeginThrowDartSignature);
  * 
  */
 UCLASS()
-class POPPIT_API APICharacter : public APoppItCharacter
+class POPPIT_API APIPlayerCharacter : public APIPlayerCharacterBase
 {
 	GENERATED_BODY()
 
 public:
 
-	APICharacter();
+	APIPlayerCharacter();
+
+protected:
+
+	class APIDartProjectile* HeldProjectile;
+
+	// APIPlayerCharacterBase interface
+	virtual void MoveForward(float Value) override;
+	virtual void MoveRight(float Value) override;
+	// End of APIPlayerCharacterBase interface
+
+	// APawn interface
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	// End of APawn interface
 
 #pragma region Dart
 
@@ -46,19 +59,6 @@ public:
 	/** Launch the currently held dart */
 	UFUNCTION(BlueprintCallable, Category = "Dart")
 	void ReleaseDart();
-
-protected:
-
-	class APIDartProjectile* HeldProjectile;
-
-	// APoppItCharacter interface
-	virtual void MoveForward(float Value) override;
-	virtual void MoveRight(float Value) override;
-	// End of APoppItCharacter interface
-
-	// APawn interface
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	// End of APawn interface
 
 private:
 
