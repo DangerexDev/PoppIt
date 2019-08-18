@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "PICharacterBase.h"
 #include "PIPlayerCharacterBase.generated.h"
 
 UCLASS(config=Game)
-class APIPlayerCharacterBase : public ACharacter
+class APIPlayerCharacterBase : public APICharacterBase
 {
 	GENERATED_BODY()
 

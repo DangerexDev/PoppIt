@@ -30,10 +30,13 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Mesh)
 	class UStaticMeshComponent* StaticMeshComponent;
 
+	UPROPERTY(EditDefaultsOnly, Category = Damage)
+	float BaseDamage;
+
 	// Function that initializes the projectile's velocity in the launch direction
 	void LaunchInDirection(const FVector& LaunchDirection);
 
 	// Function that is called when the projectile hits something
 	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	void OnStop(const FHitResult& ImpactResult);
 };

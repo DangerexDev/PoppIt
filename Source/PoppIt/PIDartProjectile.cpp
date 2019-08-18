@@ -4,16 +4,14 @@
 
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "PIDamageableComponent.h"
 
 APIDartProjectile::APIDartProjectile()
+	: BaseDamage(1.0f)
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
 	// Use a sphere as a simple collision representation
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Projectile"));
-	CollisionComponent->OnComponentHit.AddDynamic(this, &APIDartProjectile::OnHit);
 
 	// Set the sphere's collision radius
 	CollisionComponent->InitSphereRadius(15.0f);
@@ -28,6 +26,7 @@ APIDartProjectile::APIDartProjectile()
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = false;
 	ProjectileMovementComponent->bSimulationEnabled = false;
+	ProjectileMovementComponent->OnProjectileStop.AddDynamic(this, &APIDartProjectile::OnStop);
 
 	// Create an empty mesh component that has its mesh defined in the editor on Blueprint subclasses
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
@@ -50,11 +49,14 @@ void APIDartProjectile::LaunchInDirection(const FVector& LaunchDirection)
 	ProjectileMovementComponent->bSimulationEnabled = true;
 }
 
-// Function that is called when the projectile hits something
-void APIDartProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+void APIDartProjectile::OnStop(const FHitResult& ImpactResult)
 {
-	if (OtherActor != this && OtherComponent->IsSimulatingPhysics())
+	if (ImpactResult.Actor.IsValid())
 	{
-		//OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
+		if (UPIDamageableComponent* DamageableComponent = ImpactResult.Actor->FindComponentByClass<UPIDamageableComponent>())
+		{
+			DamageableComponent->ApplyDamage(BaseDamage);
+			Destroy();
+		}
 	}
 }
