@@ -17,6 +17,8 @@ class POPPIT_API APICharacterBase : public ACharacter
 public:
 	APICharacterBase();
 
+	void SetWalkSpeed(const float InWalkSpeed);
+
 protected:
 	virtual void BeginPlay() override;
 };
