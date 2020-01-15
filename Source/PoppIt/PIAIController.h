@@ -37,7 +37,13 @@ public:
 	UPROPERTY(EditAnywhere, Category = Chase)
 	FName OpponentActorBlackboardKeyName;
 
+	UPROPERTY(EditAnywhere, Category = Patrol)
+	FName PatrolOriginBlackboardKeyName;
+
 protected:
+
+	void UpdatePatrolOriginLocation(const APawn* const InPawn);
+
 
 	// Begin AController Interface
 	virtual void OnPossess(APawn* InPawn) override;

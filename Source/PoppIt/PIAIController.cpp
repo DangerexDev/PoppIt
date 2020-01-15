@@ -14,8 +14,18 @@ APIAIController::APIAIController()
 	, LineOfSightBrokenStopChasingOpponentWaitDuration(4.0f)
 	, HasLineOfSightBlackboardKeyName("bHasLineOfSight")
 	, OpponentActorBlackboardKeyName("OpponentActor")
+	, PatrolOriginBlackboardKeyName("PatrolOrigin")
 {
 	AIPerception = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("AIPerception"));
+}
+
+void APIAIController::UpdatePatrolOriginLocation(const APawn* const InPawn)
+{
+	if (InPawn)
+	{
+		FVector PatrolOrigin = InPawn->GetActorLocation();
+		Blackboard->SetValueAsVector(PatrolOriginBlackboardKeyName, PatrolOrigin);
+	}
 }
 
 void APIAIController::OnPossess(APawn* InPawn)
@@ -25,6 +35,8 @@ void APIAIController::OnPossess(APawn* InPawn)
 	if (BehaviorTree)
 	{
 		RunBehaviorTree(BehaviorTree);
+		UpdatePatrolOriginLocation(InPawn);
+
 		AIPerception->OnTargetPerceptionUpdated.AddDynamic(this, &APIAIController::OnTargetPerceptionUpdated);
 	}
 }
@@ -51,4 +63,6 @@ void APIAIController::StopChasingOpponent()
 {
 	Blackboard->SetValueAsBool(HasLineOfSightBlackboardKeyName, false);
 	Blackboard->SetValueAsObject(OpponentActorBlackboardKeyName, nullptr);
+
+	UpdatePatrolOriginLocation(GetPawn());
 }

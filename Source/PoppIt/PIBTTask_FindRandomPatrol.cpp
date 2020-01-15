@@ -29,22 +29,22 @@ EBTNodeResult::Type UPIBTTask_FindRandomPatrol::ExecuteTask(UBehaviorTreeCompone
 		if (APIAICharacterBase* const ControlledPawn = Cast<APIAICharacterBase>(AIOwner->GetPawn()))
 		{
 			ControlledPawn->SetWalkSpeed(PatrolSpeed);
-
-			const FVector PawnLocation = ControlledPawn->GetActorLocation();
-			FNavLocation PatrolNavLocation;
-			FVector PatrolLocation = PawnLocation;
-
-			if (UNavigationSystemV1* const NavigationSystem = UNavigationSystemV1::GetNavigationSystem(this))
-			{
-				if (const bool bSuccess = NavigationSystem->GetRandomReachablePointInRadius(PawnLocation, PatrolRadius, PatrolNavLocation))
-				{
-					PatrolLocation = PatrolNavLocation.Location;
-				}
-			}
-
+			
 			if (UBlackboardComponent* const BlackboardComp = OwnerComp.GetBlackboardComponent())
 			{
-				BlackboardComp->SetValue<UBlackboardKeyType_Vector>(GetSelectedBlackboardKey(), PatrolLocation);
+				const FVector PatrolOrigin = BlackboardComp->GetValueAsVector(GetSelectedBlackboardKey());
+				FNavLocation PatrolNavLocation;
+				FVector PatrolLocation = PatrolOrigin;
+
+				if (UNavigationSystemV1* const NavigationSystem = UNavigationSystemV1::GetNavigationSystem(this))
+				{
+					if (const bool bSuccess = NavigationSystem->GetRandomReachablePointInRadius(PatrolOrigin, PatrolRadius, PatrolNavLocation))
+					{
+						PatrolLocation = PatrolNavLocation.Location;
+					}
+				}
+
+				BlackboardComp->SetValueAsVector(GetPatrolDestinationBlackboardKey(), PatrolLocation);
 			}
 
 			FinishExecute(true);
