@@ -5,6 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "PIDamageableComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 APIDartProjectile::APIDartProjectile()
 	: BaseDamage(1.0f)

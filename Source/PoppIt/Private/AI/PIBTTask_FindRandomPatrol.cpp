@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "PIBTTask_FindRandomPatrol.h"
-#include "PIAICharacterBase.h"
+#include "AI/PIBTTask_FindRandomPatrol.h"
+#include "AI/PIAICharacterBase.h"
 #include "AIController.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"

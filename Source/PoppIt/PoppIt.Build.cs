@@ -6,8 +6,21 @@ public class PoppIt : ModuleRules
 {
 	public PoppIt(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+        PrivatePCHHeaderFile = "Public/PoppIt.h";
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay" });
+        PublicDependencyModuleNames.AddRange(new string[]
+        {
+            "Core",
+            "CoreUObject",
+            "Engine",
+            "InputCore",
+            "HeadMountedDisplay",
+            "UMG",
+        });
+		
+		PrivateDependencyModuleNames.AddRange(new string[]
+		{
+			
+		});
 	}
 }

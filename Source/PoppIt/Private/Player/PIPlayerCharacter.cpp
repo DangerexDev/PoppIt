@@ -1,12 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "PIPlayerCharacter.h"
+#include "Player/PIPlayerCharacter.h"
 #include "PoppIt.h"
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
 #include "PIDartProjectile.h"
 #include "Components/InputComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 APIPlayerCharacter::APIPlayerCharacter()
 : Super()

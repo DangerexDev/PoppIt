@@ -9,5 +9,6 @@ public class PoppItEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		ExtraModuleNames.Add("PoppIt");
-	}
+        DefaultBuildSettings = BuildSettingsVersion.V2;
+    }
 }

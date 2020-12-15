@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PIBTTask_ChasePlayer.h"
-#include "PIAICharacterBase.h"
+#include "AI/PIBTTask_ChasePlayer.h"
+#include "AI/PIAICharacterBase.h"
 #include "AIController.h"
 
 UPIBTTask_ChasePlayer::UPIBTTask_ChasePlayer(const FObjectInitializer & ObjectInitializer)
